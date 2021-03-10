@@ -19,6 +19,8 @@ RUN  apt-get update && \
      apt-get install -y binfmt-support qemu-user-static live-build
 RUN dpkg -i /packages/* || apt-get install -f -y
 
+RUN apt-get install -y fakeroot
+
 RUN groupadd -g $groupid $username && \
     useradd -m -u $userid -g $groupid $username && \
     echo "$username ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
