@@ -53,8 +53,18 @@ docker build --build-arg userid=$(id -u) --build-arg groupid=$(id -g) --build-ar
     --file $DIRECTORY_PATH_TO_SOURCE/docker_builder/Dockerfile $DIRECTORY_PATH_TO_SOURCE/docker_builder
 rm -rf $DIRECTORY_PATH_TO_SOURCE/docker_builder/packages
 
-OPTIONS="--privileged --rm -it"
+if [ $VERSION ] || [ $VERSION_NUMBER ] || [ $JENKINS_COMMAND ]; then
+    OPTIONS="--privileged --rm -t -e VERSION=$VERSION -e VERSION_NUMBER=$VERSION_NUMBER"
+else
+    OPTIONS="--privileged --rm -it"
+fi
 OPTIONS+=" --volume $DIRECTORY_PATH_TO_SOURCE:/source"
 echo "Options to run docker: $OPTIONS"
 
-docker run $OPTIONS $DOCKER_IMAGE
+COMMAND="chroot --skip-chdir --userspec=$USER:$USER / /bin/bash"
+
+if [ $VERSION ] || [ $VERSION_NUMBER ] || [ $JENKINS_COMMAND ]; then
+    docker run $OPTIONS $DOCKER_IMAGE $COMMAND -c "$JENKINS_COMMAND"
+else
+    docker run $OPTIONS $DOCKER_IMAGE $COMMAND
+fi
