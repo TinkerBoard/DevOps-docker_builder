@@ -5,18 +5,10 @@ ARG userid
 ARG groupid
 ARG username
 
-# Install required packages for building Tinker Edge R Android
-# kmod: depmod is required by "make modules_install"
-RUN apt-get update && apt-get install -y gawk wget git diffstat unzip \
-    texinfo gcc-multilib build-essential chrpath socat cpio python python3 \
-    python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git \
-    python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm rsync curl locales \
-    python-yaml
-
-#Add for yocto-4.0
-#RUN apt-get update && apt-get install -y zstd pzstd lz4c lz4 libssl-dev
-RUN apt-get install -y zstd  liblz4-tool lz4
-RUN apt-get update && apt-get install -y libssl-dev
+RUN apt-get update && apt-get install -y gawk wget git=1:2.25.1-1ubuntu3 diffstat unzip \
+texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip \
+python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm p7zip-full libyaml-dev \
+libssl-dev locales
 
 RUN locale-gen en_US.UTF-8
 
