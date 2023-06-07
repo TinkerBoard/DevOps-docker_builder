@@ -8,7 +8,7 @@ ARG username
 RUN apt-get update && apt-get install -y gawk wget git=1:2.25.1-1ubuntu3 diffstat unzip \
 texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip \
 python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm p7zip-full libyaml-dev \
-libssl-dev locales
+libssl-dev locales sudo
 
 RUN locale-gen en_US.UTF-8
 
