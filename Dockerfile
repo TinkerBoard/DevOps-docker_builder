@@ -12,7 +12,7 @@ COPY packages /packages
 # Install required packages for building Debian
 RUN apt-get update
 RUN apt-get install -y g++-aarch64-linux-gnu
-RUN apt-get update && apt-get install -y git=1:2.25.1-1ubuntu3 ssh make gcc libssl-dev liblz4-tool expect g++ patchelf chrpath gawk texinfo chrpath diffstat binfmt-support qemu-user-static live-build bison flex fakeroot cmake gcc-multilib g++-multilib unzip device-tree-compiler ncurses-dev libgucharmap-2-90-dev bzip2 expat gpgv2 cpp-aarch64-linux-gnu
+RUN apt-get update && apt-get install -y git=1:2.25.1-1ubuntu3 ssh make gcc libssl-dev liblz4-tool expect g++ patchelf chrpath gawk texinfo chrpath diffstat binfmt-support qemu-user-static live-build bison flex fakeroot cmake gcc-multilib g++-multilib unzip device-tree-compiler ncurses-dev libgucharmap-2-90-dev bzip2 expat gpgv2 cpp-aarch64-linux-gnu libgmp-dev libmpc-dev
 
 # kmod: depmod is required by "make modules_install"
 RUN apt-get update && apt-get install -y kmod
